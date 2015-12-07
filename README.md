@@ -1,9 +1,9 @@
 # Tenttiarkisto
 
 Important stuff:
-- Installing Ruby (in Finnish)
-https://github.com/mluukkai/WebPalvelinohjelmointi2015/wiki/railsin-asennus
+- [Installing Rails (in Finnish)](https://github.com/mluukkai/WebPalvelinohjelmointi2015/wiki/railsin-asennus)
 - Ruby version
+   - 2.2.0
 - System dependencies
 - Configuration
 - Database creation
