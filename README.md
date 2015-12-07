@@ -13,3 +13,6 @@ Important stuff:
 - Deployment instructions
 - ...
 
+General Rails instructions in Finnish
+https://github.com/mluukkai/WebPalvelinohjelmointi2015/wiki/Web-palvelinohjelmointi-Ruby-on-Rails
+
