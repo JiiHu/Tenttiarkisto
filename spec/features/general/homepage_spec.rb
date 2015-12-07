@@ -8,7 +8,7 @@ RSpec.feature "Homepage", type: :feature do
     end
 
     scenario "will show content" do
-      expect(page.html).not_to have_text 'Error'
+      expect(page).not_to have_text 'Error'
     end
 
   end
