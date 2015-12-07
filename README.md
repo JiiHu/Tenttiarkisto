@@ -1,7 +1,7 @@
 # Tenttiarkisto
+Tenttiarkisto Helsingin Yliopiston Ylioppillaskunnan käyttöön TKO-äly ry:n toimesta.
 
-Important stuff:
-- [Installing Rails (in Finnish)](https://github.com/mluukkai/WebPalvelinohjelmointi2015/wiki/railsin-asennus)
+## Important stuff
 - Ruby version
    - 2.2.0
 - System dependencies
@@ -13,6 +13,9 @@ Important stuff:
 - Deployment instructions
 - ...
 
-General Rails instructions in Finnish
-https://github.com/mluukkai/WebPalvelinohjelmointi2015/wiki/Web-palvelinohjelmointi-Ruby-on-Rails
+## Instructions
+
+[Installing Rails (in Finnish)](https://github.com/mluukkai/WebPalvelinohjelmointi2015/wiki/railsin-asennus)
+
+[General Rails instructions in Finnish](https://github.com/mluukkai/WebPalvelinohjelmointi2015/wiki/Web-palvelinohjelmointi-Ruby-on-Rails)
 
