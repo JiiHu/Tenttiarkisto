@@ -26,6 +26,23 @@
   </p>
 <% end %>
 
-<% @course.exams.each do |exam| %>
-  <%= exam %>
-<% end %>
+<table class="table">
+    <tr>
+      <th>Date</th>
+      <th>Language</th>
+      <th>Author</th>
+      <th>Description</th>
+    </tr>
+    <% @course.exams.each do |exam| %>
+      <tr>
+        <td><%= link_to exam.date, exam %></td>
+        <td><%= exam.language %></td>
+        <td><%= exam.author %></td>
+        <td><%= exam.description %></td>
+        <% if current_user_can_manage_course(@course) %>
+          <td><%= link_to 'Edit', edit_exam_path(exam), class: 'btn btn-warning' %></td>
+          <td><%= link_to 'Destroy', exam, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
