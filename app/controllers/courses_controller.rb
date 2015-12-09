@@ -11,7 +11,7 @@ class CoursesController < ApplicationController
       Course,
       params[:filterrific]
     ) or return
-    @courses = @filterrific.find.page(params[:page])
+    @courses = @filterrific.find.page(params[:page]).order("LOWER(courses.name) asc")
 
     respond_to do |format|
       format.html
