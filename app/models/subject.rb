@@ -3,6 +3,9 @@ class Subject < ActiveRecord::Base
   has_many :courses
   has_and_belongs_to_many :users
 
+  validates :name, presence: true
+
+
   filterrific(
   default_filter_params: { sorted_by: 'name_asc' },
   available_filters: [
@@ -33,6 +36,7 @@ class Subject < ActiveRecord::Base
   end
 
   def can_user_manage(user)
+    return true if user.is_super_admin
     self.users.include?(user)
   end
 

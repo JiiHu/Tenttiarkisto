@@ -28,4 +28,6 @@
   locals: { courses: @courses }
 ) %>
 
-<%= link_to 'New Course', new_course_path %>
+<% if current_user %>
+  <%= link_to 'New Course', new_course_path %>
+<% end %>
