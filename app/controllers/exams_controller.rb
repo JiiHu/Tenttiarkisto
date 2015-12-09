@@ -76,7 +76,7 @@ class ExamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
       params[:exam][:files]
-      byebug
+      make_pdf params[:exam][:files]
       params.require(:exam).permit(:language, :date, :description, :author, :files)
     end
 
@@ -84,5 +84,17 @@ class ExamsController < ApplicationController
     def validate_user_access(course)
       return if current_user.is_super_admin
       return redirect_to root_path unless current_user.subjects.include?(course.subject)
+    end
+
+    def make_pdf files
+      if(files.length > 1)
+        list = Magick::ImageList.new()
+
+          files.each {|f|
+            list.from_blob(f.read)
+          }
+      list.write("public/testi.pdf")
+
+      end
     end
 end
