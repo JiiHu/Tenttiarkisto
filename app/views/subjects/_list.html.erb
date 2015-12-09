@@ -3,19 +3,27 @@
 <%# app/views/subjects/_list.html.erb %>
 <div id="filterrific_results">
 
+  <br />
+
   <%= page_entries_info subjects %>
 
-  <table>
+  <br />
+  <br />
+
+  <table class="table">
     <tr>
       <th>Name</th>
-      <th></th>
-      <th></th>
+      <% if user_is_super_admin %>
+        <th colspan="2"></th>
+      <% end %>
     </tr>
     <% subjects.each do |subject| %>
       <tr>
         <td><%= link_to subject.name, subject %></td>
-        <td><%= link_to 'Edit', edit_subject_path(subject), class: 'btn btn-warning' %></td>
-        <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <% if user_is_super_admin %>
+          <td><%= link_to 'Edit', edit_subject_path(subject), class: 'btn btn-warning' %></td>
+          <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <% end %>
       </tr>
     <% end %>
   </table>

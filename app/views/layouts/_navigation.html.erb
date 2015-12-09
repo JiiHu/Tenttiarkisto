@@ -14,8 +14,15 @@
       <ul class="nav navbar-nav">
         <% if current_user %>
         <li>
-          <%= link_to "Logged in as " + current_user.organization, '#' %>
+          <div class="link">
+            <%= "Logged in as " + current_user.organization %>
+          </div>
         </li>
+        <% if user_is_super_admin %>
+          <li>
+            <%= link_to "Super Admin", admin_path %>
+          </li>
+        <% end %>
         <li>
           <%= link_to "Logout", destroy_user_session_path, method: :delete %>
         </li>
