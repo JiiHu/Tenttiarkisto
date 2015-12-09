@@ -5,10 +5,29 @@
 
 <h2>Courses</h2>
 
-<% if @subject.courses.empty? %>
+<%= form_for_filterrific @filterrific do |f| %>
+  <div>
+    Search
+    <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+    <%= f.text_field(
+      :search_query,
+      class: 'filterrific-periodically-observed'
+    ) %>
+  </div>
+
+  <%# add an automated spinner to your form when the list is refreshed %>
+  <%= render_filterrific_spinner %>
+<% end %>
+
+<% if @courses.empty? %>
   <p>
     No courses available
   </p>
+<% else %>
+  <%= render(
+    partial: 'courses/list',
+    locals: { courses: @courses }
+  ) %>
 <% end %>
 
 <table class="table">
