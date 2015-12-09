@@ -1,7 +1,7 @@
 class Exam < ActiveRecord::Base
   has_attached_file :exam_file, styles: { thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :exam_file,
-                                    :content_type => ['/^image\/(png|gif|jpeg|pdf)/',
+                                    :content_type => ['/^image\/(png|jpeg|jpg)/',
                                                       'application/pdf']
   belongs_to :course
 
