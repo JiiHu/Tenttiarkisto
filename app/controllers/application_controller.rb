@@ -6,9 +6,20 @@ class ApplicationController < ActionController::Base
   helper_method :current_path
   helper_method :user_is_super_admin
   helper_method :current_user_can_manage_course
+  helper_method :current_user_can_manage_exam
 
   def current_path
     request.env['PATH_INFO']
+  end
+
+
+  def current_user_can_manage_exam(exam)
+    return false unless current_user
+    return true if user_is_super_admin
+
+    return true if exam.can_user_manage(current_user)
+
+    return false
   end
 
 
