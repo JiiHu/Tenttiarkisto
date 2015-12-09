@@ -1,0 +1,24 @@
+
+
+<%# app/views/subjects/_list.html.erb %>
+<div id="filterrific_results">
+
+  <%= page_entries_info subjects %>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+    <% subjects.each do |subject| %>
+      <tr>
+        <td><%= link_to subject.name, subject %></td>
+        <td><%= link_to 'Edit', edit_subject_path(subject), class: 'btn btn-warning' %></td>
+        <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= will_paginate subjects %>

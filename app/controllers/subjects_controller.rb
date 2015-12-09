@@ -6,7 +6,18 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
-    @subjects = Subject.all
+    #@subjects = Subject.all
+
+    @filterrific = initialize_filterrific(
+      Subject,
+      params[:filterrific]
+    ) or return
+    @subjects = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /subjects/1
