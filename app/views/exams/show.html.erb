@@ -15,5 +15,10 @@
   <%= @exam.description %>
 </p>
 
+<p>
+  <strong>Description:</strong>
+  <%= @exam.author %>
+</p>
+
 <%= link_to 'Edit', edit_exam_path(@exam) %> |
 <%= link_to 'Back', exams_path %>
