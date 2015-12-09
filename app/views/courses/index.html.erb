@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Listing Courses</h1>
 
@@ -17,7 +17,7 @@
       <tr>
         <td><%= link_to course.name, course %></td>
         <td><%= course.identifier %></td>
-        <td><%= course.subject_id %></td>
+        <td><%= course.subject %></td>
         <% if current_user_can_manage_course(course) %>
           <td><%= link_to 'Edit', edit_course_path(course) %></td>
           <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>

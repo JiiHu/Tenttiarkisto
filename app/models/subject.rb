@@ -3,7 +3,7 @@ class Subject < ActiveRecord::Base
   has_many :courses
   has_and_belongs_to_many :users
 
-	filterrific(
+  filterrific(
   default_filter_params: { sorted_by: 'name_asc' },
   available_filters: [
     :sorted_by,
@@ -12,21 +12,25 @@ class Subject < ActiveRecord::Base
   )
 
   scope :search_query, lambda { |query|
-	  return nil  if query.blank?
-	  where("LOWER(subjects.name) LIKE '%"+query.to_s.downcase+"%'")
-	}
+    return nil  if query.blank?
+    where("LOWER(subjects.name) LIKE '%"+query.to_s.downcase+"%'")
+  }
 
-	scope :sorted_by, lambda { |sort_option|
-	  # extract the sort direction from the param value.
-	  direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
-	  case sort_option.to_s
-	  when /^name_/
-	    # Simple sort on the name colums
-	    order("LOWER(subjects.name) #{ direction }")
-	  else
-	    raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
-	  end
-	}
+  scope :sorted_by, lambda { |sort_option|
+    # extract the sort direction from the param value.
+    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    case sort_option.to_s
+    when /^name_/
+      # Simple sort on the name colums
+      order("LOWER(subjects.name) #{ direction }")
+    else
+      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+    end
+  }
+
+  def to_s
+    self.name
+  end
 
   def can_user_manage(user)
     self.users.include?(user)

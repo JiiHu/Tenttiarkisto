@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>
   <%= @subject.name %>
@@ -8,8 +8,6 @@
   <%= link_to 'Edit', edit_subject_path(@subject) %> |
 <% end %>
 
-<%= link_to 'Back', subjects_path %>
-
 <h2>Courses</h2>
 
 <% if @subject.courses.empty? %>
@@ -18,6 +16,23 @@
   </p>
 <% end %>
 
-<% @subject.courses.each do |course| %>
-  <%= link_to course.name, course_path(course), class: "course-link" %>
-<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Exams</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subject.courses.each do |course| %>
+      <tr>
+        <td>
+          <%= link_to course.name, course_path(course), class: "btn btn-default" %>
+        </td>
+        <td>
+          <%= course.exams.length %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
