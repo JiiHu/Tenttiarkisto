@@ -22,6 +22,7 @@
     ) %>
   </div>
 
+
   <%# add an automated spinner to your form when the list is refreshed %>
   <%= render_filterrific_spinner %>
 <% end %>
@@ -30,3 +31,8 @@
   partial: 'subjects/list',
   locals: { subjects: @subjects }
 ) %>
+
+<% if user_is_super_admin %>
+  <%= link_to 'New Subject', new_subject_path %>
+<% end %>
+

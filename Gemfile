@@ -45,7 +45,9 @@ gem 'will_paginate'
 group :development do
   # To generate layouts
   gem 'rails_layout'
-  gem 'better_errors'
+
+  # To make error page useful
+  gem "better_errors"
 end
 
 group :development, :test do

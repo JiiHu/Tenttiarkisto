@@ -8,4 +8,8 @@ class Exam < ActiveRecord::Base
     english: 2
   }
 
+  def can_user_manage(user)
+    self.course.can_user_manage(user)
+  end
+
 end

@@ -28,4 +28,8 @@ class Subject < ActiveRecord::Base
 	  end
 	}
 
+  def can_user_manage(user)
+    self.users.include?(user)
+  end
+
 end

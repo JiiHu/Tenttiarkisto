@@ -1,5 +1,9 @@
 class CoursesController < ApplicationController
+  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
+  before_action :validate_super_admin, :only => [:new, :create, :edit, :update, :destroy]
+
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_subjects, only: [:new, :edit]
 
   # GET /courses
   # GET /courses.json
@@ -19,12 +23,14 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+    validate_user_access(@course)
   end
 
   # POST /courses
   # POST /courses.json
   def create
     @course = Course.new(course_params)
+    validate_user_access(@course)
 
     respond_to do |format|
       if @course.save
@@ -40,6 +46,8 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
+    validate_user_access(@course)
+
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
@@ -54,6 +62,8 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
+    validate_user_access(@course)
+
     @course.destroy
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
@@ -62,6 +72,16 @@ class CoursesController < ApplicationController
   end
 
   private
+    def set_subjects
+      @subjects = current_user.subjects
+    end
+
+    # Validate that current_user has right to manage courses under the subject
+    def validate_user_access(course)
+      return if current_user.is_super_admin
+      return redirect_to root_path unless current_user.subjects.include?(course.subject)
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])

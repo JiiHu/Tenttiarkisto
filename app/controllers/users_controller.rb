@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :validate_super_admin
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_subjects, only: [:new, :edit]
 
   # GET /users
   # GET /users.json
@@ -62,6 +65,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def set_subjects
+      @subjects = Subject.all
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
@@ -69,6 +77,19 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
+      update_users_subjects(params[:user][:subject_ids])
       params.require(:user).permit(:organization)
     end
+
+    def update_users_subjects(subject_ids)
+      @user.subjects.clear
+
+      return if subject_ids.nil?
+
+      subject_ids.each do |id|
+        subject = Subject.find(id)
+        @user.subjects << subject
+      end
+    end
+
 end
