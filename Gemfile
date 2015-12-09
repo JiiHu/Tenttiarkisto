@@ -32,6 +32,9 @@ gem 'devise'
 # Paperclip for uploading
 gem 'paperclip'
 
+# For file upload
+gem "jquery-fileupload-rails"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
