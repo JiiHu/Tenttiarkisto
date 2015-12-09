@@ -15,6 +15,7 @@ class ExamsController < ApplicationController
 
   # GET /exams/new
   def new
+    @courses = Course.all
     @exam = Exam.new
   end
 
