@@ -14,15 +14,34 @@
  *= require_self
  */
 
-
-
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+$black: #000;;
+$link-color: #0070d1;;
+
+
+
+a,
+a:visited {
+  color: $link-color;
+  text-decoration: none;
+}
+
+a:hover {
+  background: transparent;
+  color: $black;
+  text-decoration: none;
+}
+
 
 .navbar-nav > li > .link {
   padding: 10px 15px;
 }
 
+a.btn.btn-primary:visited {
+  color: #fff;
+}
 
 
 @media (min-width: 768px) {

@@ -1,6 +1,5 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
-  before_action :validate_super_admin, :only => [:new, :create, :edit, :update, :destroy]
 
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :set_subjects, only: [:new, :edit]
@@ -88,7 +87,7 @@ class CoursesController < ApplicationController
     # Validate that current_user has right to manage courses under the subject
     def validate_user_access(course)
       return if current_user.is_super_admin
-      return redirect_to root_path unless current_user.subjects.include?(course.subject)
+      return redirect_to root_path unless course.can_user_manage(current_user)
     end
 
     # Use callbacks to share common setup or constraints between actions.
