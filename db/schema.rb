@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209185025) do
+ActiveRecord::Schema.define(version: 20151209180401) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -26,16 +26,12 @@ ActiveRecord::Schema.define(version: 20151209185025) do
     t.integer  "language"
     t.date     "date"
     t.string   "description"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "course_id"
     t.string   "author"
-    t.string   "exam_file_file_name"
-    t.string   "exam_file_content_type"
-    t.integer  "exam_file_file_size"
-    t.datetime "exam_file_updated_at"
-    t.boolean  "approved",               default: false
-    t.boolean  "rejected",               default: false
+    t.boolean  "approved",    default: false
+    t.boolean  "rejected",    default: false
   end
 
   create_table "subjects", force: :cascade do |t|

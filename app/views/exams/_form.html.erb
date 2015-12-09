@@ -28,7 +28,7 @@
     <%= f.text_field :author %>
   </div>
   <div class="field">
-    <%= f.file_field :file %>
+    <%= f.file_field :files, multiple: true %>
   </div>
   <div class="actions">
     <%= f.submit %>
