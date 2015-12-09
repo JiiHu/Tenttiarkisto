@@ -21,7 +21,7 @@ class Subject < ActiveRecord::Base
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
     case sort_option.to_s
     when /^name_/
-      # Simple sort on the name colums
+      # Simple sort on the name columns
       order("LOWER(subjects.name) #{ direction }")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
