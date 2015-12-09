@@ -1,9 +1,4 @@
 
-
-<h1>
-  <%= @subject.name %>
-</h1>
-
 <% if user_is_super_admin %>
   <%= link_to 'Edit', edit_subject_path(@subject) %> |
 <% end %>
@@ -20,6 +15,8 @@
   <thead>
     <tr>
       <th>Course</th>
+      <th>Identifier</th>
+      <th>Keywords</th>
       <th>Exams</th>
     </tr>
   </thead>
@@ -28,6 +25,12 @@
       <tr>
         <td>
           <%= link_to course.name, course_path(course), class: "btn btn-default" %>
+        </td>
+        <td>
+          <%= course.identifier %>
+        </td>
+        <td>
+          <%= course.keywords %>
         </td>
         <td>
           <%= course.exams.length %>

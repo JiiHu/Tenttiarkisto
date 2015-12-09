@@ -1,9 +1,46 @@
 <footer>
   <div class="container">
-    <div class="row text-center">
-      <div class="col-sm-12">
-        <p>&copy; <%= Date.today.year %> TKO-äly ry</p>
+    <div class="row">
+
+      <div class="col-sm-4">
+        <div class="footer-header">
+          HYY Tenttiarkisto
+        </div>
+        <p>
+          Do you want your Student Organization to have your exams here? Contact us at tenttiarkisto@tko-aly.fi
+        </p>
       </div>
+
+      <div class="col-sm-2">
+        <div class="footer-header">
+          Created by
+        </div>
+        <p>
+          <%= link_to 'http://www.tko-aly.fi' do %>
+            <%= image_tag 'tekis-150.png', class: "tekis-logo" %>
+          <% end %>
+        </p>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="footer-header">
+          Contact
+        </div>
+        <p>
+          TKO-äly ry
+          <br />tenttiarkisto@tko-aly.fi
+        </p>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="footer-header">
+          Hosting provided by
+        </div>
+        <p>
+          img
+        </p>
+      </div>
+
     </div>
   </div>
 </footer>

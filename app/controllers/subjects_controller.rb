@@ -6,6 +6,7 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
+    @header = "Subjects"
     @filterrific = initialize_filterrific(
       Subject,
       params[:filterrific]
@@ -21,15 +22,18 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
+    @header = @subject.name
   end
 
   # GET /subjects/new
   def new
+    @header = "Add Subject"
     @subject = Subject.new
   end
 
   # GET /subjects/1/edit
   def edit
+    @header = "Edit" + @course.name
   end
 
   # POST /subjects
