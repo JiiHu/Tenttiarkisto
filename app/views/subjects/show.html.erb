@@ -1,9 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h1>
   <%= @subject.name %>
-</p>
+</h1>
 
-<%= link_to 'Edit', edit_subject_path(@subject) %> |
+<% if user_is_super_admin %>
+  <%= link_to 'Edit', edit_subject_path(@subject) %> |
+<% end %>
+
 <%= link_to 'Back', subjects_path %>
+
+<h2>Courses</h2>
+
+<% if @subject.courses.empty? %>
+  <p>
+    No courses available
+  </p>
+<% end %>
+
+<% @subject.courses.each do |course| %>
+  <%= link_to course.name, course_path(course), class: "course-link" %>
+<% end %>

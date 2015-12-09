@@ -1,5 +1,7 @@
 class SubjectsController < ApplicationController
+  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :validate_super_admin, :only => [:new, :create, :edit, :update, :destroy]
 
   # GET /subjects
   # GET /subjects.json

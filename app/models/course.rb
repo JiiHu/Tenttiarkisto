@@ -4,4 +4,8 @@ class Course < ActiveRecord::Base
 
   validates :subject, presence: true
 
+  def can_user_manage(user)
+    self.subject.can_user_manage(user)
+  end
+
 end
