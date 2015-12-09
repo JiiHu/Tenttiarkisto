@@ -11,7 +11,7 @@
 </h1>
 
 <h3>
-  <%= @course.subject %>
+  <%= link_to @course.subject.name, @course.subject %>
 </h3>
 
 <% if current_user_can_manage_course(@course) %>

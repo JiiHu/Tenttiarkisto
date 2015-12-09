@@ -18,7 +18,7 @@
       <tr>
         <td><%= link_to course.name, course %></td>
         <td><%= link_to course.identifier, course %></td>
-        <td><%= course.subject.name %></td>
+        <td><%= link_to course.subject.name, course.subject %></td>
         <td><%= course.keywords %></td>
         <% if current_user_can_manage_course(course) %>
           <td><%= link_to 'Edit', edit_course_path(course), class: 'btn btn-warning' %></td>
