@@ -53,6 +53,10 @@
     text-transform: uppercase;
     font-weight: 700;
     color: #000;
+
+    &:hover {
+      background: #eee;
+    }
   }
 
   .navbar-nav > li > a {
