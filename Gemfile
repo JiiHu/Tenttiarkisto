@@ -31,6 +31,7 @@ gem 'devise'
 gem 'filterrific'
 gem 'will_paginate'
 
+gem 'jquery-fileupload-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

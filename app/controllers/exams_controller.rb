@@ -26,7 +26,6 @@ class ExamsController < ApplicationController
   # POST /exams
   # POST /exams.json
   def create
-    byebug
     @exam = Exam.new(exam_params)
 
     respond_to do |format|
@@ -76,7 +75,9 @@ class ExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
-      params.require(:exam).permit(:language, :date, :description, :author, :file)
+      params[:exam][:files]
+      byebug
+      params.require(:exam).permit(:language, :date, :description, :author, :files)
     end
 
     # Validate that current_user has right to manage courses under the subject
