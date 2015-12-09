@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :language %><br>
-    <%= f.select :language, :collection => Exam.languages.keys.to_a %>
+    <%= f.select :language, Exam.languages.keys.to_a %>
   </div>
   <div class="field">
     <%= f.label :date %><br>
