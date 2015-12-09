@@ -8,12 +8,14 @@
   <table>
     <tr>
       <th>Name</th>
+      <th>ID</th>
       <th></th>
       <th></th>
     </tr>
     <% courses.each do |course| %>
       <tr>
         <td><%= link_to course.name, course %></td>
+        <td><%= link_to course.identifier, course %></td>
         <% if current_user_can_manage_course(course) %>
           <td><%= link_to 'Edit', edit_course_path(course), class: 'btn btn-warning' %></td>
           <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
