@@ -1,4 +1,5 @@
 class ExamsController < ApplicationController
+  before_action :authenticate_user!, :only => [:edit, :update, :destroy]
   before_action :set_exam, only: [:show, :edit, :update, :destroy]
 
   # GET /exams
@@ -19,6 +20,7 @@ class ExamsController < ApplicationController
 
   # GET /exams/1/edit
   def edit
+    validate_user_access(@exam.course)
   end
 
   # POST /exams
@@ -40,6 +42,8 @@ class ExamsController < ApplicationController
   # PATCH/PUT /exams/1
   # PATCH/PUT /exams/1.json
   def update
+    validate_user_access(@exam.course)
+
     respond_to do |format|
       if @exam.update(exam_params)
         format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
@@ -54,6 +58,8 @@ class ExamsController < ApplicationController
   # DELETE /exams/1
   # DELETE /exams/1.json
   def destroy
+    validate_user_access(@exam.course)
+
     @exam.destroy
     respond_to do |format|
       format.html { redirect_to exams_url, notice: 'Exam was successfully destroyed.' }
@@ -71,4 +77,10 @@ class ExamsController < ApplicationController
     def exam_params
       params.require(:exam).permit(:language, :date, :description, :author)
     end
+
+    # Validate that current_user has right to manage courses under the subject
+    def validate_user_access(course)
+      return if current_user.is_super_admin
+      return redirect_to root_path unless current_user.subjects.include?(course.subject)
+    end    
 end
