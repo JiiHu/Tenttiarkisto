@@ -10,7 +10,7 @@ class SubjectsController < ApplicationController
       Subject,
       params[:filterrific]
     ) or return
-    @subjects = @filterrific.find.page(params[:page])
+    @subjects = @filterrific.find.page(params[:page]).order("LOWER(subjects.name) asc")
 
     respond_to do |format|
       format.html
@@ -21,6 +21,17 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
+    @filterrific = initialize_filterrific(
+      Course,
+      params[:filterrific]
+    ) or return
+    @courses = @filterrific.find.page(params[:page])
+    @courses = @courses.where(subject_id: @subject.id).order("LOWER(courses.name) asc")
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /subjects/new
