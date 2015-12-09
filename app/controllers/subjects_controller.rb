@@ -6,8 +6,6 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
-    #@subjects = Subject.all
-
     @filterrific = initialize_filterrific(
       Subject,
       params[:filterrific]

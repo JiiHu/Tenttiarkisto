@@ -8,7 +8,16 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    @filterrific = initialize_filterrific(
+      Course,
+      params[:filterrific]
+    ) or return
+    @courses = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /courses/1

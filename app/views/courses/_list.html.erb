@@ -1,0 +1,26 @@
+
+
+<%# app/views/courses/_list.html.erb %>
+<div id="filterrific_results">
+
+  <%= page_entries_info courses %>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% courses.each do |course| %>
+      <tr>
+        <td><%= link_to course.name, course %></td>
+        <% if current_user_can_manage_course(course) %>
+          <td><%= link_to 'Edit', edit_course_path(course), class: 'btn btn-warning' %></td>
+          <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= will_paginate courses %>
