@@ -15,6 +15,15 @@
     <%= f.label :organization %><br>
     <%= f.text_field :organization %>
   </div>
+
+
+  <%= f.label :subjects %><br>
+  <% @subjects.each do |subject| %>
+    <%= check_box_tag "user[subject_ids][]", subject.id, @user.subject_ids.include?(subject.id), id: dom_id(subject) %>
+    <%= label_tag dom_id(subject), subject.name %>
+    <br />
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

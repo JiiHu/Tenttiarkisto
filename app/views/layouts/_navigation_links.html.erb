@@ -1,9 +1,13 @@
 <%# add navigation links to this file %>
 
 <li class="<%= current_path == root_path ? 'active' : 'asd' %>">
-  <%= link_to 'Etusivu', root_path %>
+  <%= link_to 'Home', root_path %>
 </li>
 
 <li>
-  <%= link_to 'Linkki 2', '#' %>
+  <%= link_to 'Subjects', subjects_path %>
+</li>
+
+<li>
+  <%= link_to 'Courses', courses_path %>
 </li>
