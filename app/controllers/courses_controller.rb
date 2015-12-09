@@ -7,6 +7,7 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
+    @header = "Courses"
     @filterrific = initialize_filterrific(
       Course,
       params[:filterrific]
@@ -22,16 +23,19 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    @header = @course.subject
   end
 
   # GET /courses/new
   def new
     @course = Course.new
+    @header = "Courses"
   end
 
   # GET /courses/1/edit
   def edit
     validate_user_access(@course)
+    @header = "Courses"
   end
 
   # POST /courses

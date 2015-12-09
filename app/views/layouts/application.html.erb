@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Tenttiarkisto" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Tenttiarkisto" %>">
+
+    <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic' %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -12,7 +15,13 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
+
     <main role="main">
+
+      <% if controller.controller_name == 'frontpage' %>
+        <%= render 'layouts/jumbotron' %>
+      <% end %>
+
       <div class="container">
         <%= render 'layouts/messages' %>
         <%= yield %>

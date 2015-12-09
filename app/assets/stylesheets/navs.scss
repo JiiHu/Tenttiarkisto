@@ -1,0 +1,100 @@
+
+.navbar-brand {
+  font-weight: 700;
+  text-transform: uppercase;
+  float: left;
+
+  img.hyy-logo {
+    max-height: 40px;
+    max-width: 40px;
+    margin: -10px 10px 0 0;
+    display: inline-block;
+  }
+}
+
+
+.navbar-upper {
+  background: #fff;
+  padding-bottom: 15px;
+  padding-top: 15px;
+
+  a {
+    color: #333;
+  }
+  .nav > li > a {
+    color: #ccc;
+    padding-right: 0;
+  }
+
+  .nav > li > a:hover,
+  .nav > li > a:focus {
+    background-color: transparent;
+    color: #666;
+  }
+}
+
+.navbar-sub {
+
+  background: #222;
+  min-height: 0;
+
+  h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 17px 0 15px;
+  }
+
+  .btn-add {
+    background: #fff;
+    margin-top: 8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .navbar-nav > li > a {
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-left: 0;
+    padding-right: 30px;
+
+    &:hover {
+      background: transparent;
+      color: #aaa;
+    }
+  }
+
+  &.navbar-fixed-top {
+    top: 81px;
+  }
+
+}
+
+.navbar-nav > li > .link {
+  padding: 10px 15px;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > .link {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-header {
+    float: left;
+  }
+
+  .navbar-upper {
+    .navbar-nav > li > a {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+}

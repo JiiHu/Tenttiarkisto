@@ -1,9 +1,10 @@
 <%# app/views/students/index.html.erb %>
-
-
-
-<h1>Listing Subjects</h1>
-
+<% if controller.controller_name == 'frontpage' %>
+  <h3>Find your subject</h3>
+<% else %>
+  <h1>Subjects</h1>
+<% end %>
+<br />
 <%#
   Filterrific adds the `form_for_filterrific` view helper:
   * adds dom id 'filterrific_filter'
@@ -14,11 +15,11 @@
 %>
 <%= form_for_filterrific @filterrific do |f| %>
   <div>
-    Search
     <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
     <%= f.text_field(
       :search_query,
-      class: 'filterrific-periodically-observed'
+      class: 'filterrific-periodically-observed',
+      placeholder:"Search"
     ) %>
   </div>
 
@@ -35,4 +36,3 @@
 <% if user_is_super_admin %>
   <%= link_to 'New Subject', new_subject_path %>
 <% end %>
-
