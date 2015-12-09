@@ -1,6 +1,7 @@
 class Exam < ActiveRecord::Base
 
   belongs_to :course
+  has_one :subject, through: :course
 
   enum language: {
     Finnish: 0,

@@ -1,11 +1,19 @@
 class ExamsController < ApplicationController
-  before_action :authenticate_user!, :only => [:edit, :update, :destroy]
+  before_action :authenticate_user!, :only => [:edit, :update, :destroy, :index_approve]
   before_action :set_exam, only: [:show, :edit, :update, :destroy]
 
   # GET /exams
   # GET /exams.json
   def index
-    @exams = Exam.all
+    @exams = Exam.where(approved:true)
+  end
+
+  def index_approve
+    @exams = Exam.where('approved = ? OR rejected = ?', false, true)
+    @to_be_approved = []
+    @exams.each do |exam|
+      @to_be_approved << exam if current_user.subjects.include?(exam.subject)
+    end
   end
 
   # GET /exams/1

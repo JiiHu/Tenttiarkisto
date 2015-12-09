@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # Route for Super Admin panel
   get 'admin' => 'admin#index'
 
+  get 'approvelisting' => 'exams#index_approve'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
