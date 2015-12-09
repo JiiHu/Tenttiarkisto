@@ -24,28 +24,20 @@ class ExamsController < ApplicationController
   # POST /exams
   # POST /exams.json
   def create
-    name0 = "test1"
-    name1 = "test2"
+    #File.open("pictures/"+exam_params[0], "wb") { |f| f.write(exam_params['exam_file'][0].read) }
+    #File.open("pictures/"+exam_params[1], "wb") { |f| f.write(exam_params['exam_file'][1].read) }
+    #testi = Magick::Image.from_blob(exam_params['exam_file'].read)
 
-    directory = "pictures"
-    path = File.join(directory, name)
-    File.open(path, "wb") { |f| f.write(exam_params['exam_file'][0].read) }
-    File.open(path, "wb") { |f| f.write(exam_params['exam_file'][1].read) }
+    pictures = Magick::ImageList.new()
+    pictures.from_blob(exam_params[:exam_file].read)
+    pictures.write('pictures/test.pdf')
 
-    pictures = Magick::ImageList.new('test1.jpg', 'test2.jpg').each_with_index { |img, i|
-      img.resize_to_fit!(800, 800)
-      img.write("test.pdf") {
-        self.quality = 80
-        self.density = '300'
-        self.colorspace = Magick::RGBColorspace
-        self.interlace = Magick::NoInterlace
-      }
-    }
-    file = Tempfile.new(name)
-    picture.write(file.path)
-    exam_params['exam_file'] = picture
-    puts exam_params
+    pdf = ActionDispatch::Http::UploadedFile.new({
+        :tempfile => File.new(Rails.root.join("pictures/test.pdf"))
+    })
+
     @exam = Exam.new(exam_params)
+    @exam.exam_file = pdf
 
     respond_to do |format|
       if @exam.save
