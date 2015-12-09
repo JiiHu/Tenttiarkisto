@@ -21,3 +21,4 @@
 *.iml
 
 /public
+*DS_Store
