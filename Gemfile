@@ -32,6 +32,9 @@ gem 'devise'
 # Paperclip for uploading
 gem 'paperclip'
 
+# rmagick for shits and giggles
+gem 'rmagick'
+
 # For file upload
 gem "jquery-fileupload-rails"
 

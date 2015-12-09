@@ -24,6 +24,27 @@ class ExamsController < ApplicationController
   # POST /exams
   # POST /exams.json
   def create
+    name0 = "test1"
+    name1 = "test2"
+
+    directory = "pictures"
+    path = File.join(directory, name)
+    File.open(path, "wb") { |f| f.write(exam_params['exam_file'][0].read) }
+    File.open(path, "wb") { |f| f.write(exam_params['exam_file'][1].read) }
+
+    pictures = Magick::ImageList.new('test1.jpg', 'test2.jpg').each_with_index { |img, i|
+      img.resize_to_fit!(800, 800)
+      img.write("test.pdf") {
+        self.quality = 80
+        self.density = '300'
+        self.colorspace = Magick::RGBColorspace
+        self.interlace = Magick::NoInterlace
+      }
+    }
+    file = Tempfile.new(name)
+    picture.write(file.path)
+    exam_params['exam_file'] = picture
+    puts exam_params
     @exam = Exam.new(exam_params)
 
     respond_to do |format|
