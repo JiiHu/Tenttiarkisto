@@ -20,4 +20,5 @@
 .idea
 *.iml
 
+/public
 *DS_Store
