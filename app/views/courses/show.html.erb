@@ -1,19 +1,31 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
 
-<p>
-  <strong>Identifier:</strong>
-  <%= @course.identifier %>
-</p>
+<h1>
+  <%= @course %>
+  <small>
+    <%= @course.identifier %>
+  </small>
+  <small>
+    <%= @course.keywords %>
+  </small>
+</h1>
 
-<p>
-  <strong>Subject:</strong>
-  <%= @course.subject_id %>
-</p>
+<h3>
+  <%= @course.subject %>
+</h3>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<% if current_user_can_manage_course(@course) %>
+  <%= link_to 'Edit', edit_course_path(@course), class: "btn btn-primary" %>
+<% end %>
+
+<h3>Exams</h3>
+
+<% if @course.exams.empty? %>
+  <p>
+    No exams available
+  </p>
+<% end %>
+
+<% @course.exams.each do |exam| %>
+  <%= exam %>
+<% end %>

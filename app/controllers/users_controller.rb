@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :validate_super_admin
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :set_subjects, only: [:new, :edit]
+  before_action :set_subjects, only: [:new, :edit, :create, :update]
 
   # GET /users
   # GET /users.json
@@ -31,6 +31,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        update_users_subjects(user_params[:subject_ids])
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -45,6 +46,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        update_users_subjects(user_params[:subject_ids])
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -66,22 +68,26 @@ class UsersController < ApplicationController
 
   private
 
+    def validate_user
+      return redirect_to root_path unless current_user == @user
+    end
+
     def set_subjects
       @subjects = Subject.all
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find(params[:id] || params[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      update_users_subjects(params[:user][:subject_ids])
-      params.require(:user).permit(:organization)
+      params.require(:user).permit(:organization, :email, :password, :subject_ids => [])
     end
 
     def update_users_subjects(subject_ids)
+      return if @user.nil?
       @user.subjects.clear
 
       return if subject_ids.nil?

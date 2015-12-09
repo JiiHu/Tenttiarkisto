@@ -1,6 +1,3 @@
-<%# app/views/students/index.html.erb %>
-
-<p id="notice"><%= notice %></p>
 
 <h1>Listing Courses</h1>
 
@@ -22,7 +19,6 @@
     ) %>
   </div>
 
-
   <%# add an automated spinner to your form when the list is refreshed %>
   <%= render_filterrific_spinner %>
 <% end %>
@@ -32,4 +28,6 @@
   locals: { courses: @courses }
 ) %>
 
-<%= link_to 'New Course', new_course_path %>
+<% if current_user %>
+  <%= link_to 'New Course', new_course_path %>
+<% end %>

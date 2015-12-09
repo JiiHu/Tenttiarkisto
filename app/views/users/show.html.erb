@@ -1,18 +1,21 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Organization:</strong>
+
+<h1>
   <%= @user.organization %>
-</p>
+</h1>
 
-<p>
-  <strong>Subjects:</strong>
-  <br />
-  <% @user.subjects.each do |subject| %>
+<h3>Subjects</h3>
+<% @user.subjects.each do |subject| %>
+  <p>
     <%= subject.name %>
-    <br />
-  <% end %>
-</p>
+  </p>
+<% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if @user.subjects.empty? %>
+  <p>
+    No subjects selected
+  </p>
+<% end %>
+
+<%= link_to 'Edit', edit_user_path(@user), class: "btn btn-primary" %> |
+<%= link_to 'Back', users_path, class: "btn btn-primary" %>

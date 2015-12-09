@@ -23,6 +23,10 @@
     <%= f.label :subject_id %><br>
     <%= f.select :subject_id, options_from_collection_for_select(@subjects, :id, :name)  %>
   </div>
+  <div class="field">
+    <%= f.label :keywords %><br>
+    <%= f.text_field :keywords %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

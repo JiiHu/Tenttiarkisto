@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>
   <%= @subject.name %>
@@ -7,8 +7,6 @@
 <% if user_is_super_admin %>
   <%= link_to 'Edit', edit_subject_path(@subject) %> |
 <% end %>
-
-<%= link_to 'Back', subjects_path %>
 
 <h2>Courses</h2>
 
@@ -36,3 +34,4 @@
 	  locals: { courses: @courses }
 	) %>
 <% end %>
+
