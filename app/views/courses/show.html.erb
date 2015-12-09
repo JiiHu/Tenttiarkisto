@@ -10,10 +10,6 @@
   </small>
 </h1>
 
-<h3>
-  <%= link_to @course.subject.name, @course.subject %>
-</h3>
-
 <% if current_user_can_manage_course(@course) %>
   <%= link_to 'Edit', edit_course_path(@course), class: "btn btn-primary" %>
 <% end %>

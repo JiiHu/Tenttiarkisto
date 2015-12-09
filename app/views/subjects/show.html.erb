@@ -1,9 +1,4 @@
 
-
-<h1>
-  <%= @subject.name %>
-</h1>
-
 <% if user_is_super_admin %>
   <%= link_to 'Edit', edit_subject_path(@subject) %> |
 <% end %>
@@ -19,7 +14,7 @@
       class: 'filterrific-periodically-observed'
     ) %>
   </div>
-  
+
   <%# add an automated spinner to your form when the list is refreshed %>
   <%= render_filterrific_spinner %>
 <% end %>
@@ -29,9 +24,9 @@
     No courses available
   </p>
 <% else %>
-	<%= render(
-	  partial: 'courses/list',
-	  locals: { courses: @courses }
-	) %>
+  <%= render(
+    partial: 'courses/list',
+    locals: { courses: @courses }
+  ) %>
 <% end %>
 

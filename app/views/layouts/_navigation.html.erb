@@ -1,13 +1,10 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-upper navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to 'Tenttiarkisto', root_path, class: 'navbar-brand' %>
+      <%= link_to root_path, class: 'navbar-brand' do %>
+        <%= image_tag 'hyy.png', class: 'hyy-logo' %>
+        HYY Tenttiarkisto
+      <% end %>
     </div>
 
     <div class="pull-right">
@@ -26,17 +23,32 @@
         </li>
       <% else %>
         <li>
-          <%= link_to "Login", new_user_session_path %>
+          <%= link_to new_user_session_path do %>
+            <span class="hidden-xs">Organization </span>Login
+          <% end %>
         </li>
       <% end %>
       </ul>
     </div>
 
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <%= render 'layouts/navigation_links' %>
-      </ul>
-    </div>
+  </div>
+</nav>
+
+
+<nav class="navbar navbar-sub navbar-fixed-top">
+  <div class="container">
+
+    <h1 class="pull-left">
+      <% if @header %>
+        <%= @header %>
+      <% else %>
+        <%= controller.controller_name %>
+      <% end %>
+    </h1>
+
+    <%= link_to 'Add Exam', new_exam_path, class: "btn btn-add pull-right" %>
+
+    <div class="clearfix"></div>
 
   </div>
 </nav>
