@@ -26,6 +26,7 @@ class ExamsController < ApplicationController
   # POST /exams
   # POST /exams.json
   def create
+    byebug
     @exam = Exam.new(exam_params)
 
     respond_to do |format|
