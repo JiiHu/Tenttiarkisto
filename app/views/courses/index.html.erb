@@ -1,32 +1,33 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Listing Courses</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Identifier</th>
-      <th>Subject</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+<%#
+  Filterrific adds the `form_for_filterrific` view helper:
+  * adds dom id 'filterrific_filter'
+  * applies javascript behaviors:
+      * AJAX form submission on change
+      * AJAX spinner while AJAX request is being processed
+  * sets form_for options like :url, :method and input name prefix
+%>
+<%= form_for_filterrific @filterrific do |f| %>
+  <div>
+    Search
+    <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+    <%= f.text_field(
+      :search_query,
+      class: 'filterrific-periodically-observed'
+    ) %>
+  </div>
 
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= link_to course.name, course %></td>
-        <td><%= course.identifier %></td>
-        <td><%= course.subject_id %></td>
-        <% if current_user_can_manage_course(course) %>
-          <td><%= link_to 'Edit', edit_course_path(course) %></td>
-          <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <%# add an automated spinner to your form when the list is refreshed %>
+  <%= render_filterrific_spinner %>
+<% end %>
 
-<br>
+<%= render(
+  partial: 'courses/list',
+  locals: { courses: @courses }
+) %>
 
-<%= link_to 'New Course', new_course_path %>
+<% if current_user %>
+  <%= link_to 'New Course', new_course_path %>
+<% end %>

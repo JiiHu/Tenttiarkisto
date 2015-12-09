@@ -6,4 +6,11 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :subjects
 
+  validates :organization, presence: true
+
+
+  def to_s
+    self.organization
+  end
+
 end

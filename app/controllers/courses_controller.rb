@@ -1,6 +1,5 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
-  before_action :validate_super_admin, :only => [:new, :create, :edit, :update, :destroy]
 
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :set_subjects, only: [:new, :edit]
@@ -8,7 +7,16 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    @filterrific = initialize_filterrific(
+      Course,
+      params[:filterrific]
+    ) or return
+    @courses = @filterrific.find.page(params[:page]).order("LOWER(courses.name) asc")
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /courses/1
@@ -79,7 +87,7 @@ class CoursesController < ApplicationController
     # Validate that current_user has right to manage courses under the subject
     def validate_user_access(course)
       return if current_user.is_super_admin
-      return redirect_to root_path unless current_user.subjects.include?(course.subject)
+      return redirect_to root_path unless course.can_user_manage(current_user)
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -89,6 +97,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :identifier, :subject_id)
+      params.require(:course).permit(:name, :identifier, :subject_id, :keywords)
     end
 end
