@@ -76,9 +76,8 @@ class ExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
-      params[:exam][:files]
-      make_pdf params[:exam][:files], params[:exam][:date], "kurssi", "type"
-      params.require(:exam).permit(:language, :date, :description, :author, :files)
+      filename = make_pdf params[:exam][:files], params[:exam]['date(1i)']+'-'+params[:exam]['date(2i)']+'-'+params[:exam]['date(3i)'], params[:exam][:course_id], 'type'
+      params.require(:exam).permit(:language, :date, :description, :author, :course_id)
     end
 
     # Validate that current_user has right to manage courses under the subject
@@ -87,12 +86,14 @@ class ExamsController < ApplicationController
       return redirect_to root_path unless current_user.subjects.include?(course.subject)
     end
 
-    def make_pdf files, date, course, type
-      filename = "public/"+course+"/"+date+"_"+course+"_"+type+".pdf"
+    def make_pdf (files, date, course, type)
+      filename = "public/"+course+"/"+date+"_"+Course.find(course).name+"_"+type+".pdf"
+      FileUtils::mkdir_p 'public/'+course
       list = Magick::ImageList.new()
       files.each {|f|
         list.from_blob(f.read)
       }
       list.write(filename)
+      filename
     end
 end
