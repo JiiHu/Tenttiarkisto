@@ -96,7 +96,7 @@ class ExamsController < ApplicationController
 
     def make_pdf (files, date, course, type)
       filename = course+"/"+date+"_"+Course.find(course).name+"_"+type+".pdf"
-      FileUtils::mkdir_p course
+      FileUtils::mkdir_p "public/"+course
       list = Magick::ImageList.new()
       files.each {|f|
         list.from_blob(f.read)
