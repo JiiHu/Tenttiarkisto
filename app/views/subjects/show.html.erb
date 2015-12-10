@@ -30,3 +30,8 @@
   ) %>
 <% end %>
 
+<% if current_user %>
+ <% if user_is_super_admin or current_user.subjects.include? @subject %>
+  <%= link_to "New course", {:controller => "courses", :action => "new", :subject => @subject.id}, class: 'btn btn-primary' %>
+  <% end %>
+<% end %>

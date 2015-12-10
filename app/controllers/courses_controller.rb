@@ -28,6 +28,9 @@ class CoursesController < ApplicationController
 
   # GET /courses/new
   def new
+    if params[:subject] 
+      @default = params[:subject]
+    end
     @course = Course.new
     @header = "Courses"
   end
@@ -85,7 +88,11 @@ class CoursesController < ApplicationController
 
   private
     def set_subjects
-      @subjects = current_user.subjects
+      if current_user.is_super_admin
+        @subjects = Subject.all()
+      else
+        @subjects = current_user.subjects
+      end
     end
 
     # Validate that current_user has right to manage courses under the subject
