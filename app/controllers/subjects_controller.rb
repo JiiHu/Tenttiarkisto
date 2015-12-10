@@ -44,7 +44,7 @@ class SubjectsController < ApplicationController
 
   # GET /subjects/1/edit
   def edit
-    @header = "Edit" + @subject.name
+    @header = "Edit " + @subject.name
   end
 
   # POST /subjects
