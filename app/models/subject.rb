@@ -13,7 +13,7 @@ class Subject < ActiveRecord::Base
 
   scope :search_query, lambda { |query|
 	  return nil  if query.blank?
-	  where("LOWER(subjects.name) LIKE '%"+query.to_s.downcase+"%'").order("LOWER(subjects.name) asc")
+	  where("LOWER(subjects.name) LIKE ?", '%'+query.to_s.downcase+'%')
 	}
 
   def to_s
