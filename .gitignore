@@ -19,3 +19,6 @@
 #ignore rubymine files
 .idea
 *.iml
+
+Gemfile.lock
+public/*/.pdf
