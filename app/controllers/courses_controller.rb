@@ -24,6 +24,18 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @header = @course.subject
+    @header = "Courses"
+    @filterrific = initialize_filterrific(
+      Exam.where(course_id: @course.id),
+      params[:filterrific]
+    ) or return
+    @exams = @filterrific.find.page(params[:page])
+              .order("exams.date desc")
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /courses/new

@@ -24,11 +24,10 @@ class SubjectsController < ApplicationController
   def show
     @header = @subject.name
     @filterrific = initialize_filterrific(
-      Course,
+      Course.where(subject_id: @subject.id),
       params[:filterrific]
     ) or return
-    @courses = @filterrific.find.page(params[:page])
-    @courses = @courses.where(subject_id: @subject.id).order("LOWER(courses.name) asc")
+    @courses = @filterrific.find.page(params[:page]).order("LOWER(courses.name) asc")
 
     respond_to do |format|
       format.html
