@@ -22,7 +22,7 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
-    @header = @subject.name
+    @header = "Subjects"
     @filterrific = initialize_filterrific(
       Course.where(subject_id: @subject.id),
       params[:filterrific]

@@ -1,9 +1,10 @@
+<h1> <%= @subject.name %></h1>
 
 <% if user_is_super_admin %>
-  <%= link_to 'Edit', edit_subject_path(@subject) %>
+  <%= link_to 'Edit', edit_subject_path(@subject), class: "btn btn-primary" %>
 <% end %>
 
-<h2>Courses</h2>
+<h3>Courses</h3>
 
 <%= form_for_filterrific @filterrific do |f| %>
   <div>
