@@ -27,7 +27,7 @@ class CoursesController < ApplicationController
     @header = @course.subject
     @header = "Courses"
     @filterrific = initialize_filterrific(
-      Exam.where(course_id: @course.id),
+      Exam.where(course_id: @course.id).where(approved: true),
       params[:filterrific],
       :persistence_id => false
     ) or return
