@@ -21,4 +21,4 @@
 *.iml
 
 Gemfile.lock
-public/*/.pdf
+public/*/*.pdf
