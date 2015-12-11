@@ -17,10 +17,10 @@ class Exam < ActiveRecord::Base
 
   scope :search_query, lambda { |query|
     return nil if query.blank?
-    where("(LOWER(exams.author) LIKE '%"+query.to_s.downcase+"%')"+
-          " OR (LOWER(exams.description) LIKE '%"+query.to_s.downcase+"%')"+
-          " OR (exams.date LIKE '%"+query.to_s.downcase+"%')"
-          )
+    q='%'+query.to_s.downcase+'%'
+    where("(LOWER(exams.author) LIKE ?) OR 
+           (LOWER(exams.description) LIKE ?) OR 
+           (exams.date LIKE ?)", q, q, q)
   }
 
   def can_user_manage(user)
