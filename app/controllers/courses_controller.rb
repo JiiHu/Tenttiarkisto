@@ -10,7 +10,8 @@ class CoursesController < ApplicationController
     @header = "Courses"
     @filterrific = initialize_filterrific(
       Course,
-      params[:filterrific]
+      params[:filterrific],
+      :persistence_id => false
     ) or return
     @courses = @filterrific.find.page(params[:page]).order("LOWER(courses.name) asc")
 
@@ -27,7 +28,8 @@ class CoursesController < ApplicationController
     @header = "Courses"
     @filterrific = initialize_filterrific(
       Exam.where(course_id: @course.id),
-      params[:filterrific]
+      params[:filterrific],
+      :persistence_id => false
     ) or return
     @exams = @filterrific.find.page(params[:page])
               .order("exams.date desc")

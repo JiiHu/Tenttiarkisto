@@ -9,7 +9,8 @@ class SubjectsController < ApplicationController
     @header = "Subjects"
     @filterrific = initialize_filterrific(
       Subject,
-      params[:filterrific]
+      params[:filterrific],
+      :persistence_id => false
     ) or return
     @subjects = @filterrific.find.page(params[:page]).order("LOWER(subjects.name) asc")
 
@@ -25,7 +26,8 @@ class SubjectsController < ApplicationController
     @header = "Subjects"
     @filterrific = initialize_filterrific(
       Course.where(subject_id: @subject.id),
-      params[:filterrific]
+      params[:filterrific],
+      :persistence_id => false
     ) or return
     @courses = @filterrific.find.page(params[:page]).order("LOWER(courses.name) asc")
 
