@@ -22,3 +22,7 @@
 
 Gemfile.lock
 public/*/*.pdf
+
+/public
+*DS_Store
+

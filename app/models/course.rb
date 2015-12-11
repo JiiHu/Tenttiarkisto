@@ -22,9 +22,10 @@ class Course < ActiveRecord::Base
 
   scope :search_query, lambda { |query|
 	  return nil if query.blank?
-	  where("(LOWER(courses.name) LIKE '%"+query.to_s.downcase+"%')"+
-          " OR (LOWER(courses.identifier) LIKE '%"+query.to_s.downcase+"%')"+
-          " OR (LOWER(courses.keywords) LIKE '%"+query.to_s.downcase+"%')")
+    q='%'+query.to_s.downcase+'%'
+	  where("(LOWER(courses.name) LIKE ?) OR 
+           (LOWER(courses.identifier) LIKE ?) OR 
+           (LOWER(courses.keywords) LIKE ?)", q, q, q)
 	}
 
 end

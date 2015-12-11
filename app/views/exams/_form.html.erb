@@ -27,6 +27,13 @@
     <%= f.label :author %><br>
     <%= f.text_field :author %>
   </div>
+  <div class="field">
+    <%= f.label :course %><br>
+    <%= f.collection_select :course_id, Course.order(:name),:id,:name, include_blank: true %>
+  </div>
+  <div class="field">
+    <%= f.file_field :files, multiple: true %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

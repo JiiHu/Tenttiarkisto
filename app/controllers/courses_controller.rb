@@ -10,7 +10,8 @@ class CoursesController < ApplicationController
     @header = "Courses"
     @filterrific = initialize_filterrific(
       Course,
-      params[:filterrific]
+      params[:filterrific],
+      :persistence_id => false
     ) or return
     @courses = @filterrific.find.page(params[:page]).order("LOWER(courses.name) asc")
 
@@ -24,10 +25,26 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @header = @course.subject
+    @header = "Courses"
+    @filterrific = initialize_filterrific(
+      Exam.where(course_id: @course.id),
+      params[:filterrific],
+      :persistence_id => false
+    ) or return
+    @exams = @filterrific.find.page(params[:page])
+              .order("exams.date desc")
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /courses/new
   def new
+    if params[:subject] 
+      @default = params[:subject]
+    end
     @course = Course.new
     @header = "Courses"
   end
@@ -85,7 +102,11 @@ class CoursesController < ApplicationController
 
   private
     def set_subjects
-      @subjects = current_user.subjects
+      if current_user.is_super_admin
+        @subjects = Subject.all()
+      else
+        @subjects = current_user.subjects
+      end
     end
 
     # Validate that current_user has right to manage courses under the subject
