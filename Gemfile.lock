@@ -44,6 +44,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.3.7)
     arel (6.0.3)
     autoprefixer-rails (6.1.2)
       execjs
@@ -96,6 +97,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.6.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     filterrific (2.0.5)
       rails (>= 3.1.0)
     globalid (0.3.6)
@@ -113,6 +119,8 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -240,10 +248,12 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   devise
+  factory_girl_rails
   filterrific
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails
+  launchy
   pg
   rails (= 4.2.1)
   rails_layout
