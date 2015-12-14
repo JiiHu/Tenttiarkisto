@@ -26,16 +26,12 @@ ActiveRecord::Schema.define(version: 20151209211042) do
     t.integer  "language"
     t.date     "date"
     t.string   "description"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "course_id"
     t.string   "author"
-    t.string   "exam_file_file_name"
-    t.string   "exam_file_content_type"
-    t.integer  "exam_file_file_size"
-    t.datetime "exam_file_updated_at"
-    t.boolean  "approved",               default: false
-    t.boolean  "rejected",               default: false
+    t.boolean  "approved",    default: false
+    t.boolean  "rejected",    default: false
     t.string   "filepath"
   end
 
