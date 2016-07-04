@@ -3,6 +3,8 @@ Tenttiarkisto Helsingin Yliopiston Ylioppillaskunnan käyttöön TKO-äly ry:n t
 
 Exam archive to be used by The Student Union of the University of Helsinki. Made by TKO-äly ry.
 
+Live at [tentit.fi](http://tentit.fi)
+
 ## Important stuff
 - Ruby version
    - 2.2.0

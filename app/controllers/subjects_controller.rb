@@ -9,7 +9,8 @@ class SubjectsController < ApplicationController
     @header = "Subjects"
     @filterrific = initialize_filterrific(
       Subject,
-      params[:filterrific]
+      params[:filterrific],
+      :persistence_id => false
     ) or return
     @subjects = @filterrific.find.page(params[:page]).order("LOWER(subjects.name) asc")
 
@@ -22,13 +23,13 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
-    @header = @subject.name
+    @header = "Subjects"
     @filterrific = initialize_filterrific(
-      Course,
-      params[:filterrific]
+      Course.where(subject_id: @subject.id),
+      params[:filterrific],
+      :persistence_id => false
     ) or return
-    @courses = @filterrific.find.page(params[:page])
-    @courses = @courses.where(subject_id: @subject.id).order("LOWER(courses.name) asc")
+    @courses = @filterrific.find.page(params[:page]).order("LOWER(courses.name) asc")
 
     respond_to do |format|
       format.html
@@ -44,7 +45,7 @@ class SubjectsController < ApplicationController
 
   # GET /subjects/1/edit
   def edit
-    @header = "Edit" + @course.name
+    @header = "Edit " + @subject.name
   end
 
   # POST /subjects

@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :subject_id %><br>
-    <%= f.select :subject_id, options_from_collection_for_select(@subjects, :id, :name)  %>
+    <%= f.select :subject_id, options_from_collection_for_select(@subjects, :id, :name, @default)  %>
   </div>
   <div class="field">
     <%= f.label :keywords %><br>

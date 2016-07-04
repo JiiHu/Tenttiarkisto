@@ -4,9 +4,10 @@ class FrontpageController < ApplicationController
     @header = "Home"
     @filterrific = initialize_filterrific(
       Subject,
-      params[:filterrific]
+      params[:filterrific],
+      :persistence_id => false
     ) or return
-    @subjects = @filterrific.find.page(params[:page])
+    @subjects = @filterrific.find.page(params[:page]).order("subjects.name asc")
 
     respond_to do |format|
       format.html

@@ -1,11 +1,19 @@
 class ExamsController < ApplicationController
-  before_action :authenticate_user!, :only => [:edit, :update, :destroy]
+  before_action :authenticate_user!, :only => [:edit, :update, :destroy, :index_approve]
   before_action :set_exam, only: [:show, :edit, :update, :destroy]
 
   # GET /exams
   # GET /exams.json
   def index
-    @exams = Exam.all
+    @exams = Exam.where(approved:true)
+  end
+
+  def index_approve
+    @exams = Exam.where('approved = ? OR rejected = ?', false, true)
+    @to_be_approved = []
+    @exams.each do |exam|
+      @to_be_approved << exam if current_user.subjects.include?(exam.subject)
+    end
   end
 
   # GET /exams/1
@@ -15,6 +23,7 @@ class ExamsController < ApplicationController
 
   # GET /exams/new
   def new
+    @courses = Course.all
     @exam = Exam.new
   end
 
@@ -75,12 +84,24 @@ class ExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
-      params.require(:exam).permit(:language, :date, :description, :author)
+      params[:exam][:filepath] = make_pdf params[:exam][:files], params[:exam]['date(1i)']+'-'+params[:exam]['date(2i)']+'-'+params[:exam]['date(3i)'], params[:exam][:course_id], 'type'
+      params.require(:exam).permit(:language, :date, :description, :author, :course_id, :filepath)
     end
 
     # Validate that current_user has right to manage courses under the subject
     def validate_user_access(course)
       return if current_user.is_super_admin
       return redirect_to root_path unless current_user.subjects.include?(course.subject)
-    end    
+    end
+
+    def make_pdf (files, date, course, type)
+      filename = course+"/"+date+"_"+Course.find(course).name+"_"+type+".pdf"
+      FileUtils::mkdir_p "public/"+course
+      list = Magick::ImageList.new()
+      files.each {|f|
+        list.from_blob(f.read)
+      }
+      list.write("public/"+filename)
+      filename
+    end
 end

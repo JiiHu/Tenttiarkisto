@@ -19,6 +19,9 @@
   <strong>Author:</strong>
   <%= @exam.author %>
 </p>
+<p>
+  <strong><%= link_to @exam.filepath.split("/").last, "/"+@exam.filepath %></strong>
+</p>
 <% if current_user_can_manage_course(@exam.course) %>
-	<%= link_to 'Edit', edit_exam_path(@exam) %> | <% end %>
-	<%= link_to 'Back', exams_path %>
+	<%= link_to 'Edit', edit_exam_path(@exam) %>
+<% end %>
